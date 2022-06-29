@@ -17,7 +17,7 @@ __clone:
 	mov x2, x4
 	mov x3, x5
 	mov x4, x6
-	ldr x7, =220
+	ldr x8, =220
 	svc #0
 
 	cbz x0, 1f
@@ -30,5 +30,5 @@ __clone:
 	blr x1
 
 	# Exit
-	ldr x7, =93
+	ldr x8, =93
 	svc #0

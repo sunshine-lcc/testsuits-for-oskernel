@@ -10,7 +10,7 @@ set(ASM_DIR asm)
 set(BIN_DIR bin)
 
 # Toolchain
-set(PREFIX ${ARCH}-linux-musl-)
+set(PREFIX ${ARCH}-none-elf-)
 
 set(CMAKE_ASM_COMPILER      ${PREFIX}gcc)
 set(CMAKE_C_COMPILER        ${PREFIX}gcc)

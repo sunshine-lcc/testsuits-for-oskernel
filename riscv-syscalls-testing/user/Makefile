@@ -13,8 +13,8 @@ cmake_build_args += -DCMAKE_BUILD_TYPE=Debug
 endif
 
 # aarch64-unknown-elf-
-OBJCOPY := $(ARCH)-linux-musl-objcopy
-OBJDUMP := $(ARCH)-linux-musl-objdump
+OBJCOPY := $(ARCH)-none-elf-objcopy
+OBJDUMP := $(ARCH)-none-elf-objdump
 CP := cp
 CH_TESTS :=  
 
