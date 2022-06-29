@@ -1,34 +1,34 @@
 # __clone(func, stack, flags, arg, ptid, tls, ctid)
-#           a0,    a1,    a2,  a3,   a4,  a5,   a6
+#           x0,    x1,    x2,  x3,   x4,  x5,   x6
 
 # syscall(SYS_clone, flags, stack, ptid, tls, ctid)
-#                a7     a0,    a1,   a2,  a3,   a4
+#                x7     x0,    x1,   x2,  x3,   x4
 
 .global __clone
 .type  __clone, %function
 __clone:
 	# Save func and arg to stack
-	addi a1, a1, -16
-	sd a0, 0(a1)
-	sd a3, 8(a1)
+	add x1, x1, -16
+	str x0, [x1, #0]
+	str x3, [x1, #8]
 
 	# Call SYS_clone
-	mv a0, a2
-	mv a2, a4
-	mv a3, a5
-	mv a4, a6
-	li a7, 220 # SYS_clone
-	ecall
+	mov x0, x2
+	mov x2, x4
+	mov x3, x5
+	mov x4, x6
+	ldr x7, =220
+	svc #0
 
-	beqz a0, 1f
+	cbz x0, 1f
 	# Parent
 	ret
 
 	# Child
-1:      ld a1, 0(sp)
-	ld a0, 8(sp)
-	jalr a1
+1:      ldr x1, [sp, #0]
+	ldr x0, [sp, #8]
+	blr x1
 
 	# Exit
-	li a7, 93 # SYS_exit
-	ecall
+	ldr x7, =93
+	svc #0

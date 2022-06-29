@@ -3,35 +3,21 @@ cmake_minimum_required(VERSION 3.13)
 project(user)
 enable_language(ASM)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "")
+set(ARCH_DIR lib/arch/${ARCH})
 
-# Path
-if (${ARCH} STREQUAL riscv32 OR ${ARCH} STREQUAL riscv64)
-    set(ARCH_DIR lib/arch/riscv)
-else()
-    set(ARCH_DIR lib/arch/${ARCH})
-endif()
 
 set(ASM_DIR asm)
 set(BIN_DIR bin)
 
 # Toolchain
-set(PREFIX ${ARCH}-unknown-elf-)
-# riscv64-unknown-elf-
-
-if (${ARCH} STREQUAL riscv32)
-    set(CMAKE_C_FLAGS       "-march=rv32imac -mabi=ilp32 -mcmodel=medany")
-elseif (${ARCH} STREQUAL riscv64)
-    set(CMAKE_C_FLAGS       "-march=rv64imac -mabi=lp64 -mcmodel=medany")
-else()
-    message("Unsupported arch: ${ARCH}")
-endif ()
+set(PREFIX ${ARCH}-linux-musl-)
 
 set(CMAKE_ASM_COMPILER      ${PREFIX}gcc)
 set(CMAKE_C_COMPILER        ${PREFIX}gcc)
 set(CMAKE_OBJCOPY           ${PREFIX}objcopy)
 set(CMAKE_OBJDUMP           ${PREFIX}objdump)
 set(CMAKE_RANLIB            ${PREFIX}ranlib)
-set(CMAKE_C_FLAGS           "${CMAKE_C_FLAGS} -fno-builtin -nostdinc -fno-stack-protector -ggdb -Wall")
+set(CMAKE_C_FLAGS           "${CMAKE_C_FLAGS} -fno-builtin -nostdinc -fno-stack-protector -ggdb -Wall -static")
 set(CMAKE_ASM_FLAGS         ${CMAKE_C_FLAGS})
 set(CMAKE_C_LINK_FLAGS      "${LINK_FLAGS} -nostdlib -T ${CMAKE_CURRENT_SOURCE_DIR}/${ARCH_DIR}/user.ld")
 

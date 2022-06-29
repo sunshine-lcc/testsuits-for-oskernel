@@ -1,4 +1,4 @@
-ARCH ?= riscv64
+ARCH ?= aarch64
 MODE ?= release
 CHAPTER ?= 7
 app_dir = src
@@ -12,9 +12,9 @@ else ifeq ($(MODE), debug)
 cmake_build_args += -DCMAKE_BUILD_TYPE=Debug
 endif
 
-# riscv64-unknown-elf-
-OBJCOPY := $(ARCH)-unknown-elf-objcopy
-OBJDUMP := $(ARCH)-unknown-elf-objdump
+# aarch64-unknown-elf-
+OBJCOPY := $(ARCH)-linux-musl-objcopy
+OBJDUMP := $(ARCH)-linux-musl-objdump
 CP := cp
 CH_TESTS :=  
 
@@ -48,9 +48,9 @@ endif
 binary:
 	@mkdir -p build
 	@cd build && cmake $(cmake_build_args) .. && make
-	@$(CP) src/oscomp/text.txt build/riscv64/
-	@mkdir build/riscv64/mnt && touch build/riscv64/mnt/test_mount
-	@ln -s build/riscv64/ .
+	@$(CP) src/oscomp/text.txt build/aarch64/
+	@mkdir build/aarch64/mnt && touch build/aarch64/mnt/test_mount
+	@ln -s build/aarch64/ .
 
 pre:
 	@rm -rf $(out_dir)
@@ -60,4 +60,4 @@ pre:
 all: binary
 
 clean:
-	@rm -rf build target asm riscv64
+	@rm -rf build target asm aarch64

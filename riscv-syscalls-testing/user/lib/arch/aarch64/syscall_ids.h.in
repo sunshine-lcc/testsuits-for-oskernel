@@ -1,4 +1,4 @@
-// Based on https://git.musl-libc.org/cgit/musl/tree/arch/riscv64/bits/syscall.h.in
+// Based on https://git.musl-libc.org/cgit/musl/tree/arch/aarch64/bits/syscall.h.in
 
 #define __NR_io_setup 0
 #define __NR_io_destroy 1
@@ -38,6 +38,7 @@
 #define __NR_unlinkat 35
 #define __NR_symlinkat 36
 #define __NR_linkat 37
+#define __NR_renameat 38
 #define __NR_umount2 39
 #define __NR_mount 40
 #define __NR_pivot_root 41
@@ -78,7 +79,7 @@
 #define __NR_splice 76
 #define __NR_tee 77
 #define __NR_readlinkat 78
-#define __NR_fstatat 79
+#define __NR_newfstatat 79
 #define __NR_fstat 80
 #define __NR_sync 81
 #define __NR_fsync 82
@@ -153,7 +154,6 @@
 #define __NR_setfsuid 151
 #define __NR_setfsgid 152
 #define __NR_times 153
-#define __NR_time 1062
 #define __NR_setpgid 154
 #define __NR_getpgid 155
 #define __NR_getsid 156
@@ -244,7 +244,6 @@
 #define __NR_perf_event_open 241
 #define __NR_accept4 242
 #define __NR_recvmmsg 243
-#define __NR_arch_specific_syscall 244
 #define __NR_wait4 260
 #define __NR_prlimit64 261
 #define __NR_fanotify_init 262
@@ -280,8 +279,30 @@
 #define __NR_io_pgetevents 292
 #define __NR_rseq 293
 #define __NR_kexec_file_load 294
-#define __NR_riscv_flush_icache 244 + 15
+#define __NR_pidfd_send_signal 424
+#define __NR_io_uring_setup 425
+#define __NR_io_uring_enter 426
+#define __NR_io_uring_register 427
+#define __NR_open_tree		428
+#define __NR_move_mount		429
+#define __NR_fsopen		430
+#define __NR_fsconfig		431
+#define __NR_fsmount		432
+#define __NR_fspick		433
+#define __NR_pidfd_open		434
+#define __NR_clone3		435
+#define __NR_close_range	436
+#define __NR_openat2		437
+#define __NR_pidfd_getfd	438
+#define __NR_faccessat2		439
+#define __NR_process_madvise	440
+#define __NR_epoll_pwait2	441
+#define __NR_mount_setattr	442
+#define __NR_landlock_create_ruleset	444
+#define __NR_landlock_add_rule	445
+#define __NR_landlock_restrict_self	446
 #define __NR_spawn 400
 #define __NR_mailread 401
 #define __NR_mailwrite 402
 #define __NR_mkdir 1030
+#define __NR_time 1062
